@@ -1,4 +1,6 @@
 # 🎥 ZAHY FILMS – Video Streaming Platform Based on Microservices
+<img  alt="image" src="https://github.com/user-attachments/assets/89f337a6-bfb7-444c-8fc4-b12f2d7850e2" style="width: 300px; height: 300px;"  />
+
 
 ## 🧠 Project Overview
 
