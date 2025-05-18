@@ -24,12 +24,10 @@ ZAHY FILMS is an innovative video streaming platform designed to offer an intuit
 ZAHY FILMS follows a modern three-tier architecture:
 
 ![image](https://github.com/user-attachments/assets/d1a3571c-222b-4336-ba36-956013544e75)
-  <img src="assets/d1a3571c-222b-4336-ba36-956013544e75" alt="Project's architecture" style="width: 900PX; height: 300px;">
 
 ### Frontend
 - **Web**: Developed with Angular, TypeScript, HTML, and CSS
-- **Mobile**: (Optional/Planned) Android-based app using MVVM pattern
-
+- **ia agent botpress**: Multilingual assistance, available 24/7, with answers to frequently asked questions about subscriptions and usage.
 ### Backend
 - **Java & Spring Boot**: Modular microservices for Users, Videos, Comments, Recommendations, and Notifications
 - **Python & Flask**: Sentiment analysis and AI services
@@ -44,19 +42,17 @@ ZAHY FILMS follows a modern three-tier architecture:
 
 ## 🚀 Getting Started
 ## Prerequisites
-Java JDK 17+
+- Java JDK 17+
 
-Node.js (v16+)
-
-MySQL Server
-
-Angular CLI
-
-Maven
-
-Docker (optional)
-
-Git
+- Node.js (v16+)
+  
+- MySQL Server
+  
+- Angular CLI
+  
+- Maven
+  
+- Git
 
 ### Backend Setup
 ```
@@ -85,34 +81,32 @@ Backend runs on: http://localhost:8080
 
 🔁 Integration Tests (User ↔ Video ↔ Recommendation)
 
-🧪 Frontend UI Tests with Jasmine/Karma
-
 🧪 API tests via Postman
 
 📊 Code quality with SonarQube
 
 ## 📱 Features by Role
 ### 👤 User
-Register/Login
+- Register/Login
 
-Browse and watch videos
+- Browse and watch videos
 
-Comment, like/dislike content
+- Comment, like/dislike content
 
-Receive recommendations
+- Receive recommendations
 
-Access notification center
+- Access notification center
 
-Interact with CineBot (chat assistant)
+- Interact with CineBot (chat assistant)
 
 ### 🛠️ Admin
-Manage users and subscriptions
+- Manage users and subscriptions
 
-Manage videos (upload, edit, delete)
+- Manage videos (upload, edit, delete)
 
-Moderate comments
+- Moderate comments
 
-View platform stats (dashboard)
+- View platform stats (dashboard)
 
 ### 📚 Technologies Used
 Frontend: Angular, TypeScript, HTML, CSS
