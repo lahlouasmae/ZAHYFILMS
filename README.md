@@ -81,6 +81,7 @@ npm install
 ng serve --open
 ```
 Frontend will run on: http://localhost:4200
+
 Backend runs on: http://localhost:8080
 
 ## 🧪 Testing
