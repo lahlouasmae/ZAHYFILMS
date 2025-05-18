@@ -1,0 +1,69 @@
+<div class="container mt-4">
+    <h2>Gestion des Utilisateurs</h2>
+  
+    <div *ngIf="isLoading" class="text-center my-4">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Chargement...</span>
+      </div>
+    </div>
+  
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  
+    <div *ngIf="!isLoading && !errorMessage">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>{{ filteredUsers.length }} utilisateur(s) trouvé(s)</h4>
+      </div>
+  
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+        
+              <th>Photo</th>
+              <th>Nom d'utilisateur</th>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Email</th>
+              <th>Type d'abonnement</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of filteredUsers">
+            
+              <td>
+                <div class="user-avatar">
+                  <img *ngIf="getImageUrl(user.image)" [src]="getImageUrl(user.image)" alt="Photo de profil" class="rounded-circle" width="40" height="40">
+                  <div *ngIf="!getImageUrl(user.image)" class="avatar-placeholder">
+                    {{ user.username.charAt(0).toUpperCase() }}
+                  </div>
+                </div>
+              </td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.nom || '-' }}</td>
+              <td>{{ user.prenom || '-' }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <span class="badge subscription-badge" [ngClass]="getSubscriptionClass(user)">
+                  {{ getSubscriptionType(user) }}
+                </span>
+              </td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-danger" (click)="deleteUser(user.id)">
+                    <i class="bi bi-trash"></i> Supprimer
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <div *ngIf="filteredUsers.length === 0" class="alert alert-info">
+        Aucun utilisateur trouvé.
+      </div>
+    </div>
+  </div>

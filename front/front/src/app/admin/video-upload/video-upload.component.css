@@ -1,0 +1,228 @@
+/* admin/video-upload/video-upload.component.css */
+.video-upload-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #141414; /* Fond noir style Netflix */
+  color: #e5e5e5; /* Texte gris clair Netflix */
+}
+
+.card {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+  border: none;
+  margin-bottom: 30px;
+  border-radius: 4px; /* Coins moins arrondis style Netflix */
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background-color: #181818; /* Carte foncée Netflix */
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(255, 55, 55, 0.3);
+  transform: translateY(-3px);
+}
+
+.card-header {
+  border-bottom: none;
+  padding: 18px 22px;
+  background: #181818; /* Fond sombre uni */
+  color: #e5e5e5;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #e50914; /* Rouge Netflix */
+}
+
+.card-body {
+  padding: 28px;
+  background-color: #181818; /* Fond sombre */
+}
+
+/* Form Elements */
+.form-label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #e5e5e5;
+}
+
+.form-control, .form-select {
+  border-radius: 4px;
+  border: 1px solid #333333;
+  padding: 10px 15px;
+  transition: all 0.2s ease;
+  background-color: #333333; /* Input foncé */
+  color: #e5e5e5;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #e50914; /* Rouge Netflix */
+  box-shadow: 0 0 0 0.2rem rgba(229, 9, 20, 0.25);
+}
+
+textarea.form-control {
+  min-height: 100px;
+  resize: vertical;
+  background-color: #333333;
+  color: #e5e5e5;
+}
+
+/* Genre badges */
+.badge {
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 30px;
+  background-color: #333333;
+  color: #e5e5e5;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+}
+
+.badge:hover {
+  background-color: #e50914; /* Rouge Netflix au survol */
+  transform: translateY(-2px);
+}
+
+.btn-close-white {
+  font-size: 0.6rem;
+  margin-left: 8px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  color: #e5e5e5;
+}
+
+.btn-close-white:hover {
+  opacity: 1;
+}
+
+/* Genre selection */
+.input-group {
+  margin-bottom: 10px;
+}
+
+.input-group .form-control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group .btn {
+  padding: 10px 15px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-text {
+  font-size: 0.8rem;
+  color: #999999; /* Gris moyen */
+}
+
+/* File information box */
+.bg-light {
+  background-color: #232323 !important; /* Fond gris foncé */
+  border-radius: 4px;
+  border-left: 4px solid #e50914; /* Bordure rouge Netflix */
+  color: #e5e5e5;
+}
+
+/* Progress bar */
+.progress {
+  height: 16px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #333333;
+  margin-top: 8px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar {
+  background: #e50914; /* Rouge Netflix */
+  transition: width 0.2s ease;
+}
+
+/* Buttons */
+.btn {
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: #e50914; /* Rouge Netflix */
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #f40612; /* Rouge Netflix plus vif */
+  box-shadow: 0 4px 8px rgba(229, 9, 20, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: #333333; /* Gris foncé */
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  color: #e5e5e5;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #444444;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-outline-secondary {
+  color: #e5e5e5;
+  border-color: #555555;
+}
+
+.btn-outline-secondary:hover:not(:disabled) {
+  background-color: #e50914; /* Rouge Netflix */
+  color: white;
+  border-color: #e50914;
+}
+
+/* Alerts */
+.alert {
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.alert-danger {
+  background-color: #2d0b0e;
+  color: #ff8c94;
+  border-left: 4px solid #e50914; /* Rouge Netflix */
+}
+
+.alert-success {
+  background-color: #0b2d13;
+  color: #8cff94;
+  border-left: 4px solid #1ed760; /* Vert foncé */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .video-upload-container {
+    padding: 10px;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+}

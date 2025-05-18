@@ -1,0 +1,35 @@
+<!-- recommendation.component.html -->
+<div class="recommendations-container">
+  <h1 class="section-title">Recommandations pour vous</h1>
+
+  <!-- État de chargement -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Chargement des recommandations...</p>
+  </div>
+
+  <!-- Message d'erreur -->
+  <div *ngIf="hasError" class="error-container">
+    <p class="error-message">{{ errorMessage }}</p>
+    <button class="retry-button" (click)="retryLoading()">Réessayer</button>
+  </div>
+
+  <!-- Contenu des recommandations -->
+  <div *ngIf="!isLoading && !hasError" class="recommendations-grid">
+    <div *ngIf="recommendations.length === 0" class="no-content">
+      <p>Aucune recommandation disponible pour le moment.</p>
+    </div>
+
+    <div class="video-cards-container">
+      <div *ngFor="let video of recommendations" class="video-card-wrapper">
+        <app-video-card 
+          [video]="video"
+          [formattedDuration]="formatDuration(video.duration)"
+          (playVideo)="handlePlayVideo(video)"
+          (favoriteChanged)="handleFavoriteChanged($event)">
+        </app-video-card>
+      </div>
+    </div>
+  </div>
+</div>
+

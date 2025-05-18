@@ -1,0 +1,63 @@
+<div class="favorites-container">
+  <div class="header">
+    <h1>Mes films favoris</h1>
+    <button class="back-button" (click)="goBack()">Retour aux films</button>
+  </div>
+
+  <!-- Section des favoris -->
+  <div class="section favorites-section">
+    <div *ngIf="loading" class="loading">
+      Chargement des favoris...
+    </div>
+
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="!loading && !errorMessage && favorites.length === 0" class="empty-state">
+      <p>Vous n'avez pas encore de films favoris.</p>
+      <button (click)="goBack()">Découvrir des films</button>
+    </div>
+
+    <div *ngIf="!loading && favorites.length > 0" class="video-cards-container">
+      <div *ngFor="let video of favorites" class="video-card-wrapper">
+        <app-video-card
+          [video]="video"
+          (playVideo)="playVideo(video)"
+          (favoriteChanged)="onFavoriteChanged($event)">
+        </app-video-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section des recommandations basées sur les favoris (affichage horizontal) -->
+  <div *ngIf="favorites.length > 0" class="section recommendations-section">
+    <h2>Films recommandés basés sur vos favoris</h2>
+    
+    <div *ngIf="loadingRecommendations" class="loading">
+      Chargement des recommandations...
+    </div>
+    
+    <div *ngIf="recommendationsError" class="error">
+      {{ recommendationsError }}
+    </div>
+    
+    <div *ngIf="!loadingRecommendations && !recommendationsError && recommendationsFav.length === 0" class="empty-state">
+      <p>Aucune recommandation n'est disponible pour le moment.</p>
+    </div>
+    
+    <div *ngIf="!loadingRecommendations && recommendationsFav.length > 0" class="video-cards-container">
+      <div *ngFor="let video of recommendationsFav" class="video-card-wrapper">
+        <app-video-card
+          [video]="video"
+          (playVideo)="playVideo(video)"
+          (favoriteChanged)="onFavoriteChanged($event)">
+        </app-video-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="refresh-button-container">
+    <button class="refresh-button" (click)="refreshFavorites()">Actualiser</button>
+  </div>
+</div>

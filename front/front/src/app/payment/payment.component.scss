@@ -1,0 +1,159 @@
+/* payment/payment.component.scss */
+.card-container {
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 4px;
+    padding: 30px;
+    max-width: 900px;
+    margin: 60px auto;
+    color: #fff;
+  }
+  
+  h2 {
+    color: #e50914;
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .message-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .loading-spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #e50914;
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 15px;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .alert {
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .alert-success {
+    background-color: rgba(40, 167, 69, 0.2);
+    border: 1px solid #28a745;
+    color: #28a745;
+  }
+  
+  .alert-danger {
+    background-color: rgba(220, 53, 69, 0.2);
+    border: 1px solid #dc3545;
+    color: #dc3545;
+  }
+  
+  .abonnement-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .abonnement-card {
+    background-color: rgba(38, 38, 38, 0.8);
+    border-radius: 4px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .abonnement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  }
+  
+  .abonnement-header {
+    background-color: rgba(229, 9, 20, 0.8);
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .abonnement-header h3 {
+    margin: 0;
+    font-size: 22px;
+  }
+  
+  .abonnement-prix {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px 0 0;
+  }
+  
+  .abonnement-content {
+    padding: 20px;
+    flex-grow: 1;
+  }
+  
+  .abonnement-features {
+    list-style-type: none;
+    padding: 0;
+    margin: 15px 0;
+  }
+  
+  .abonnement-features li {
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .abonnement-features li:before {
+    content: "✓";
+    color: #e50914;
+    margin-right: 8px;
+  }
+  
+  .abonnement-footer {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .btn-subscribe {
+    background-color: #e50914;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+  }
+  
+  .btn-subscribe:hover {
+    background-color: #f40612;
+  }
+  
+  .btn-subscribe:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+  }
+  
+  @media (max-width: 768px) {
+    .card-container {
+      margin: 30px 20px;
+      padding: 20px;
+    }
+    
+    .abonnement-list {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .abonnement-card {
+      width: 100%;
+      max-width: 320px;
+    }
+  }

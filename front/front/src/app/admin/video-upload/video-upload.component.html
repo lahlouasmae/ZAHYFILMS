@@ -1,0 +1,169 @@
+<!-- admin/video-upload/video-upload.component.html -->
+<div class="video-upload-container">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h2><i class="fas fa-upload me-2"></i>Télécharger une nouvelle vidéo</h2>
+    </div>
+    <div class="card-body">
+      <!-- Message d'erreur -->
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Erreur!</strong> {{ errorMessage }}
+        <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+      </div>
+      
+      <!-- Message de succès -->
+      <div *ngIf="isUploadSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Succès!</strong> {{ message }}
+        <button type="button" class="btn-close" (click)="isUploadSuccess = false; message = ''"></button>
+      </div>
+      
+      <form [formGroup]="uploadForm" (ngSubmit)="uploadVideo()">
+        <!-- Champ de titre -->
+        <div class="mb-3">
+          <label for="title" class="form-label">Titre*</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="title" 
+            formControlName="title" 
+            placeholder="Titre de la vidéo"
+            [ngClass]="{'is-invalid': title?.invalid && (title?.dirty || title?.touched)}"
+          >
+          <div *ngIf="title?.invalid && (title?.dirty || title?.touched)" class="invalid-feedback">
+            <div *ngIf="title?.errors?.['required']">Le titre est obligatoire.</div>
+            <div *ngIf="title?.errors?.['minlength']">Le titre doit contenir au moins 3 caractères.</div>
+          </div>
+        </div>
+        
+        <!-- Champ de description -->
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea 
+            class="form-control" 
+            id="description" 
+            formControlName="description" 
+            rows="3"
+            placeholder="Description de la vidéo (optionnel)"
+          ></textarea>
+        </div>
+        
+        <!-- Niveau d'abonnement requis -->
+        <div class="mb-3">
+          <label for="niveauAbonnementRequis" class="form-label">Niveau d'abonnement requis*</label>
+          <select 
+            class="form-select" 
+            id="niveauAbonnementRequis" 
+            formControlName="niveauAbonnementRequis"
+            [ngClass]="{'is-invalid': niveauAbonnementRequis?.invalid && (niveauAbonnementRequis?.dirty || niveauAbonnementRequis?.touched)}"
+          >
+            <option value="Standard">Standard (Gratuit)</option>
+            <option *ngFor="let abonnement of abonnements" [value]="abonnement.nom">
+              {{ abonnement.nom }}
+            </option>
+          </select>
+          <div *ngIf="niveauAbonnementRequis?.invalid && (niveauAbonnementRequis?.dirty || niveauAbonnementRequis?.touched)" class="invalid-feedback">
+            <div *ngIf="niveauAbonnementRequis?.errors?.['required']">Le niveau d'abonnement est obligatoire.</div>
+          </div>
+        </div>
+        
+        <!-- Sélection des genres -->
+        <div class="mb-3">
+          <label class="form-label">Genres</label>
+          
+          <!-- Affichage des genres déjà sélectionnés -->
+          <div class="d-flex flex-wrap mb-2">
+            <div *ngFor="let control of genresArray.controls; let i = index" class="me-2 mb-2">
+              <span class="badge bg-primary p-2">
+                {{ control.value }}
+                <button type="button" class="btn-close btn-close-white ms-2" aria-label="Retirer" (click)="removeGenre(i)"></button>
+              </span>
+            </div>
+          </div>
+          
+          <!-- Sélection à partir de la liste existante -->
+          <div class="input-group mb-2">
+            <select 
+              class="form-select" 
+              id="genreSelect" 
+              [(ngModel)]="newGenre" 
+              [ngModelOptions]="{standalone: true}"
+            >
+              <option value="">-- Sélectionner un genre --</option>
+              <option *ngFor="let genre of availableGenres" [value]="genre">{{ genre }}</option>
+            </select>
+            <button 
+              type="button" 
+              class="btn btn-outline-secondary" 
+              (click)="addGenre()"
+              [disabled]="!newGenre"
+            >
+              <i class="fas fa-plus"></i> Ajouter
+            </button>
+          </div>
+          
+        </div>
+        
+        <!-- Sélection de fichier -->
+        <div class="mb-3">
+          <label for="file" class="form-label">Fichier vidéo*</label>
+          <input 
+            type="file" 
+            class="form-control" 
+            id="file" 
+            (change)="onFileSelected($event)"
+            accept="video/*"
+            [ngClass]="{'is-invalid': file?.invalid && (file?.dirty || file?.touched)}"
+          >
+          <div *ngIf="file?.invalid && (file?.dirty || file?.touched)" class="invalid-feedback">
+            <div *ngIf="file?.errors?.['required']">Veuillez sélectionner un fichier vidéo.</div>
+          </div>
+         
+        </div>
+        
+        <!-- Informations sur le fichier sélectionné -->
+        <div *ngIf="selectedFile" class="mb-3 p-3 bg-light rounded">
+          <h5>Fichier sélectionné:</h5>
+          <div><strong>Nom:</strong> {{ selectedFile.name }}</div>
+          <div><strong>Type:</strong> {{ selectedFile.type }}</div>
+          <div><strong>Taille:</strong> {{ (selectedFile.size / (1024 * 1024)).toFixed(2) }} MB</div>
+        </div>
+        
+        <!-- Barre de progression -->
+        <div *ngIf="isUploading" class="mb-3">
+          <label class="form-label">Progression: {{ progress }}%</label>
+          <div class="progress">
+            <div 
+              class="progress-bar progress-bar-striped progress-bar-animated" 
+              role="progressbar" 
+              [style.width.%]="progress"
+              [attr.aria-valuenow]="progress" 
+              aria-valuemin="0" 
+              aria-valuemax="100"
+            ></div>
+          </div>
+        </div>
+        
+        <!-- Boutons d'action -->
+        <div class="d-flex justify-content-between">
+          <button 
+            type="button" 
+            class="btn btn-secondary" 
+            (click)="resetForm()"
+            [disabled]="isUploading"
+          >
+            <i class="fas fa-times me-1"></i> Annuler
+          </button>
+          <button 
+            type="submit" 
+            class="btn btn-primary" 
+            [disabled]="isUploading || uploadForm.invalid || !selectedFile"
+          >
+            <i class="fas fa-upload me-1"></i> 
+            <span *ngIf="!isUploading">Télécharger</span>
+            <span *ngIf="isUploading">Téléchargement en cours...</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+<!-- admin-dashboard.component.html -->
+<div class="dashboard-container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="mb-4">Tableau de bord administrateur</h1>
+      <p>Bonjour, {{ currentUser.username }}</p>
+    </div>
+  </div>
+
+  <!-- Cartes d'information générales -->
+  <div class="row mt-4">
+    <!-- Carte des utilisateurs -->
+    <div class="col-md-3">
+      <div class="card bg-primary text-white mb-4">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="card-title">Utilisateurs</h5>
+              <h2 class="mb-0">{{ userCount || '...' }}</h2>
+            </div>
+            <div>
+              <i class="fas fa-users fa-3x opacity-50"></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer d-flex align-items-center justify-content-between">
+          <a routerLink="/admin/user-management" class="small text-white stretched-link">Voir détails</a>
+          <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Carte des abonnements actifs -->
+    <div class="col-md-3">
+      <div class="card bg-success text-white mb-4">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="card-title">Abonnements actifs</h5>
+              <h2 class="mb-0">{{ subscriptionCount || '...' }}</h2>
+            </div>
+            <div>
+              <i class="fas fa-tags fa-3x opacity-50"></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer d-flex align-items-center justify-content-between">
+          <a routerLink="/admin/subscription-management" class="small text-white stretched-link">Voir détails</a>
+          <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+        </div>
+      </div>
+    </div>
+    
+  
+    
+     <div class="col-md-3">
+      <div class="card bg-info text-white mb-4">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="card-title">Types d'abonnements</h5>
+              <h2 class="mb-0">{{ abonnements.length || '...' }}</h2>
+            </div>
+            <div>
+              <i class="fas fa-clipboard-list fa-3x opacity-50"></i>
+            </div>
+          </div>
+        </div>
+
+  <!-- Graphiques -->
+  <div class="row">
+    <!-- Graphique de répartition des abonnements -->
+    <div class="col-lg-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <i class="fas fa-chart-pie me-1"></i>
+          Répartition des abonnements
+        </div>
+        <div class="card-body" style="position: relative; height: 300px;">
+          <canvas id="subscriptionChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Graphique des rôles utilisateurs -->
+    <div class="col-lg-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <i class="fas fa-chart-pie me-1"></i>
+          Répartition des rôles utilisateurs
+        </div>
+        <div class="card-body" style="position: relative; height: 300px;">
+          <canvas id="userRoleChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Graphique d'activité utilisateur -->
+    <div class="col-lg-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <i class="fas fa-chart-line me-1"></i>
+          Tendance des inscriptions
+        </div>
+        <div class="card-body" style="position: relative; height: 300px;">
+          <canvas id="userActivityChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Graphique des genres de vidéos -->
+    <div class="col-lg-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <i class="fas fa-chart-bar me-1"></i>
+          Distribution des genres de vidéos
+        </div>
+        <div class="card-body" style="position: relative; height: 300px;">
+          <canvas id="videoGenreChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

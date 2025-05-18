@@ -1,0 +1,174 @@
+/* Styles pour le formulaire style Netflix */
+.netflix-form-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+    url('/assets/image.png');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+  }
+  
+  .form-wrapper {
+    width: 100%;
+    max-width: 450px;
+    padding: 60px 68px 40px;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+  
+  .form-title {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+  
+  .form-group {
+    margin-bottom: 16px;
+  }
+  
+  .form-control {
+    width: 100%;
+    height: 50px;
+    background-color: #333;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  .form-control:focus {
+    background-color: #454545;
+    outline: none;
+  }
+  
+  .btn-sign-in {
+    width: 100%;
+    height: 48px;
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 24px 0 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .btn-sign-in:hover {
+    background-color: #f40612;
+  }
+  
+  .error-message {
+    color: #e87c03;
+    font-size: 13px;
+    margin-top: 6px;
+    margin-bottom: 0;
+  }
+  
+  .error-alert {
+    color: #e87c03;
+    background-color: rgba(232, 124, 3, 0.1);
+    border: 1px solid #e87c03;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
+  .success-message {
+    color: #2ecc71;
+    background-color: rgba(46, 204, 113, 0.1);
+    border: 1px solid #2ecc71;
+    border-radius: 4px;
+    padding: 15px;
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  .form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #b3b3b3;
+    font-size: 13px;
+    margin-top: 10px;
+  }
+  
+  .remember-me {
+    display: flex;
+    align-items: center;
+  }
+  
+  .remember-me input {
+    margin-right: 5px;
+  }
+  
+  .help-link {
+    color: #b3b3b3;
+    text-decoration: none;
+  }
+  
+  .help-link:hover {
+    text-decoration: underline;
+  }
+  
+  .social-login {
+    margin-top: 20px;
+    color: #b3b3b3;
+    font-size: 13px;
+  }
+  
+  .facebook-login {
+    color: #b3b3b3;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  .facebook-login i {
+    color: #3b5998;
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  
+  .signup-now {
+    margin-top: 16px;
+    color: #737373;
+    font-size: 16px;
+  }
+  
+  .signup-now a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 5px;
+  }
+  
+  .signup-now a:hover {
+    text-decoration: underline;
+  }
+  
+  .recaptcha-info {
+    margin-top: 15px;
+    color: #8c8c8c;
+    font-size: 13px;
+  }
+  
+  .recaptcha-info a {
+    color: #0071eb;
+    text-decoration: none;
+  }
+  
+  .recaptcha-info a:hover {
+    text-decoration: underline;
+  }

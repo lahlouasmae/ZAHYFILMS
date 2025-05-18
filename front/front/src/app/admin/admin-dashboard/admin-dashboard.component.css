@@ -1,0 +1,211 @@
+/* admin-dashboard.component.css - style inspiré de Netflix */
+.dashboard-container {
+  padding: 20px;
+  background-color: #000; /* Noir Netflix */
+  color: #e5e5e5; /* Gris très clair Netflix */
+}
+
+/* Cards statistiques */
+.card {
+  border-radius: 4px; /* Netflix utilise des coins moins arrondis */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #181818; /* Gris foncé Netflix */
+  border: none; /* Netflix utilise des interfaces sans bordures */
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.card-title {
+  margin-bottom: 5px;
+  font-size: 0.85rem;
+  font-weight: 400; /* Netflix utilise des polices plus légères */
+  text-transform: uppercase;
+  color: #b3b3b3; /* Gris moyen Netflix */
+  letter-spacing: 0.5px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-body h2 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0;
+}
+
+.card-footer {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-top: none; /* Netflix évite les séparateurs visibles */
+  padding: 12px 20px;
+}
+
+.card-footer a {
+  color: #e5e5e5;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+/* Couleurs des cartes à la Netflix */
+.bg-primary {
+  background: #E50914; /* Rouge Netflix */
+}
+
+.bg-success {
+  background: #64D2FF; /* Bleu clair pour contraste */
+}
+
+.bg-warning {
+  background: #F5F5F1; /* Beige Netflix avec texte foncé */
+  color: #141414 !important; 
+}
+
+.bg-warning h2, .bg-warning .card-title, .bg-warning a {
+  color: #141414 !important;
+}
+
+.bg-danger {
+  background: #831010; /* Rouge foncé Netflix */
+}
+
+/* Liste d'activités */
+.activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activity-list li {
+  padding: 16px 0;
+  border-bottom: 1px solid #404040; /* Gris plus clair pour les séparateurs */
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.activity-list li:hover {
+  background-color: #222222; /* Gris un peu plus clair au survol */
+}
+
+.activity-list li:last-child {
+  border-bottom: none;
+}
+
+.activity-list li i {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(229, 9, 20, 0.1); /* Subtile touche de rouge */
+  border-radius: 50%;
+  margin-right: 15px;
+  color: #E50914; /* Rouge Netflix pour les icônes */
+}
+
+.activity-text {
+  flex-grow: 1;
+  color: #e5e5e5;
+  font-size: 0.95rem;
+}
+
+.activity-time {
+  color: #b3b3b3; /* Gris Netflix */
+  font-size: 0.8rem;
+}
+
+/* Boutons d'action style Netflix */
+.btn {
+  padding: 10px 15px;
+  border-radius: 2px; /* Netflix utilise des boutons moins arrondis */
+  transition: all 0.2s;
+  font-weight: 500;
+  box-shadow: none; /* Netflix n'utilise pas d'ombres sur les boutons */
+}
+
+.btn i {
+  margin-right: 8px;
+}
+
+.btn-outline-primary {
+  color: #e5e5e5;
+  border-color: #E50914; /* Rouge Netflix */
+  background-color: transparent;
+}
+
+.btn-outline-success {
+  color: #e5e5e5;
+  border-color: #64D2FF; /* Bleu clair */
+  background-color: transparent;
+}
+
+.btn-outline-info {
+  color: #e5e5e5;
+  border-color: #919191; /* Gris moyen */
+  background-color: transparent;
+}
+
+.btn-outline-dark {
+  color: #e5e5e5;
+  border-color: #404040; /* Gris foncé */
+  background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+  background-color: #E50914; /* Rouge Netflix */
+  color: white;
+  border-color: #E50914;
+}
+
+.btn-outline-success:hover {
+  background-color: #64D2FF;
+  color: #141414; /* Texte noir sur fond bleu clair */
+  border-color: #64D2FF;
+}
+
+.btn-outline-info:hover {
+  background-color: #919191;
+  color: white;
+  border-color: #919191;
+}
+
+.btn-outline-dark:hover {
+  background-color: #404040;
+  color: white;
+  border-color: #404040;
+}
+
+/* En-têtes de cartes */
+.card-header {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom: none;
+  padding: 16px 20px;
+  font-weight: 500;
+  color: #e5e5e5;
+  display: flex;
+  align-items: center;
+}
+
+.card-header i {
+  margin-right: 10px;
+  opacity: 0.8;
+  color: #E50914; /* Rouge Netflix pour les icônes */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 15px 10px;
+  }
+  
+  .card-body h2 {
+    font-size: 1.8rem;
+  }
+}

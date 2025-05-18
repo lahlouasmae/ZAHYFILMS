@@ -1,0 +1,138 @@
+<!-- profile.component.html -->
+<div class="app-container">
+  <!-- Sidebar is kept from original design -->
+
+  <div class="main-content">
+    <!-- Profile Container -->
+    <div class="profile-container">
+      <!-- Loading Spinner -->
+      <div *ngIf="isLoading" class="loading-container">
+        <div class="loading-spinner"></div>
+        <span>Chargement...</span>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Success Message -->
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
+
+      <!-- View Mode -->
+      <div *ngIf="profile && !isLoading && !isEditing" class="view-mode">
+        <div class="profile-layout">
+          <div class="profile-photo-section">
+            <div class="profile-photo-container">
+              <img [src]="profileImageUrl || defaultAvatarUrl" alt="Profile Photo">
+              
+            </div>
+            
+        
+          </div>
+          
+          <div class="profile-info-section">
+            <div class="info-row">
+              <div class="info-label">Name:</div>
+              <div class="info-value">{{ profile.username }}</div>
+            </div>
+            
+            <div class="info-row">
+              <div class="info-label">Email:</div>
+              <div class="info-value">{{ profile.email }}</div>
+            </div>
+            
+            <div class="info-row">
+              <div class="info-label">Nom:</div>
+              <div class="info-value">{{ profile.nom || 'Non spécifié' }}</div>
+            </div>
+            
+            <div class="info-row">
+              <div class="info-label">Prénom:</div>
+              <div class="info-value">{{ profile.prenom || 'Non spécifié' }}</div>
+            </div>
+            
+            <div class="info-row">
+              <div class="info-label">Type d'abonnement:</div>
+              <div class="info-value">{{ profile.typeAbonnementNom || 'Aucun abonnement' }}</div>
+            </div>
+            
+            <button (click)="startEditing()" class="edit-profile-btn">
+              <i class="fa fa-edit"></i> EDIT PROFILE
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Mode -->
+      <div *ngIf="isEditing" class="edit-mode">
+        <form (ngSubmit)="saveProfile()">
+          <div class="profile-layout">
+            <div class="profile-photo-section">
+              <div class="profile-photo-container">
+                <img [src]="tempImageUrl || profileImageUrl || defaultAvatarUrl" alt="Profile Photo">
+               
+              </div>
+              <div class="file-input-container">
+                <input type="file" id="profile-image" class="file-input" 
+                      (change)="onFileSelected($event)" accept="image/*">
+                <label for="profile-image" class="file-input-label">Choisir une image</label>
+              </div>
+            </div>
+            
+            <div class="profile-info-section">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" 
+                      [(ngModel)]="editProfile.username" name="username" placeholder="Votre nom d'utilisateur">
+                <div *ngIf="usernameError" class="form-error">
+                  {{ usernameError }}
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control" 
+                      [(ngModel)]="editProfile.email" name="email" placeholder="Votre adresse email">
+                <div *ngIf="emailError" class="form-error">
+                  {{ emailError }}
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" class="form-control" 
+                      [(ngModel)]="editProfile.nom" name="nom" placeholder="Votre nom">
+              </div>
+              
+              <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" class="form-control" 
+                      [(ngModel)]="editProfile.prenom" name="prenom" placeholder="Votre prénom">
+              </div>
+              
+              <div class="form-group">
+                <label for="abonnement">Type d'abonnement</label>
+                <select id="abonnement" class="form-control"
+                        [(ngModel)]="editProfile.typeAbonnementId" name="typeAbonnementId">
+                  <option [ngValue]="null">Aucun abonnement</option>
+                  <option *ngFor="let abo of abonnements" [value]="abo.id">{{ abo.nom }}</option>
+                </select>
+              </div>
+              
+              <div class="btn-group">
+                <button type="button" (click)="cancelEditing()" class="btn cancel-btn">Annuler</button>
+                <button type="submit" class="btn save-btn" [disabled]="isLoading">
+                  <span *ngIf="isLoading" class="loading-spinner"></span>
+                  Enregistrer
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

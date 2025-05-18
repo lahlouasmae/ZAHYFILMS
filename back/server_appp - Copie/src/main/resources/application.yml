@@ -1,0 +1,35 @@
+server:
+  port: 8089
+spring:
+  application:
+    name: video-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/video_service
+  servlet:
+    multipart:
+      max-file-size: 2000MB
+      max-request-size: 2000MB
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: video-service-group
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+logging:
+  level:
+    com.example.videoservice: DEBUG
+    io.minio: DEBUG
+minio:
+  endpoint: http://localhost:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucketName: videos
+jwt:
+  secret: votreClefSecreteTresTresLongueEtSecuriseeDeAuMoins256BitsPourLaSecurite

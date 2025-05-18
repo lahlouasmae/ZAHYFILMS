@@ -1,0 +1,53 @@
+/* admin/video-management/video-management.component.css */
+.video-management-container {
+    padding: 20px;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    margin-bottom: 30px;
+  }
+  
+  .card-header {
+    border-bottom: none;
+    padding: 15px 20px;
+  }
+  
+  .card-body {
+    padding: 25px;
+  }
+  
+  .table th, .table td {
+    vertical-align: middle;
+  }
+  
+  .description-cell {
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .modal-backdrop {
+    opacity: 0.5;
+  }
+  
+  /* Styles pour les boutons d'action */
+  .btn-group .btn {
+    margin-right: 5px;
+  }
+  
+  .btn-group .btn:last-child {
+    margin-right: 0;
+  }
+  
+  /* Animation pour le modal */
+  .modal.fade.show {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }

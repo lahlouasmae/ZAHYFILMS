@@ -1,0 +1,69 @@
+<div class="history-container">
+  <div class="header">
+    <h1>Mon historique de visionnage</h1>
+    <div class="header-actions">
+      <button class="clear-button" (click)="clearHistory()">Effacer l'historique</button>
+      <button class="back-button" (click)="goBack()">Retour aux films</button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    Chargement de l'historique...
+  </div>
+
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!loading && !errorMessage && historyVideos.length === 0" class="empty-state">
+    <p>Vous n'avez pas encore regardé de films.</p>
+    <button (click)="goBack()">Découvrir des films</button>
+  </div>
+
+  <div *ngIf="!loading && historyVideos.length > 0" class="video-cards-container">
+    <div *ngFor="let video of historyVideos" class="video-card-wrapper">
+      <app-video-card
+        [video]="video"
+        [showFavoriteButton]="true"
+        (playVideo)="playVideo(video)"
+        (favoriteChanged)="onFavoriteChanged($event)">
+      </app-video-card>
+    </div>
+  </div>
+
+  <!-- Section Recommandations -->
+  <div class="recommendations-section" *ngIf="historyVideos.length > 0">
+    <div class="recommendations-header">
+      <h2>Recommandations pour vous basés sur votre historique</h2>
+      <button class="toggle-button" (click)="toggleRecommendations()">
+        {{ showRecommendations ? 'Masquer' : 'Afficher' }}
+      </button>
+    </div>
+    
+    <div *ngIf="showRecommendations">
+      <div *ngIf="loadingRecommendations" class="loading">
+        Chargement des recommandations...
+      </div>
+  
+      <div *ngIf="recommendationsError" class="error">
+        {{ recommendationsError }}
+        <button (click)="refreshRecommendations()">Réessayer</button>
+      </div>
+  
+      <div *ngIf="!loadingRecommendations && !recommendationsError && recommendedVideos.length === 0" class="empty-state">
+        <p>Aucune recommandation disponible pour le moment.</p>
+      </div>
+  
+      <div *ngIf="!loadingRecommendations && recommendedVideos.length > 0" class="video-cards-container">
+        <div *ngFor="let video of recommendedVideos" class="video-card-wrapper">
+          <app-video-card
+            [video]="video"
+            [showFavoriteButton]="true"
+            (playVideo)="playVideo(video)"
+            (favoriteChanged)="onFavoriteChanged($event)">
+          </app-video-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

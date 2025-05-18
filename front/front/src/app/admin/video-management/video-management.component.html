@@ -1,0 +1,219 @@
+<div class="video-management-container">
+  <div class="card">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h2><i class="fas fa-film me-2"></i>Gestion des vidéos</h2>
+    </div>
+    <div class="card-body">
+      <!-- Message de succès -->
+      <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Succès!</strong> {{ successMessage }}
+        <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+      </div>
+      
+      <!-- Message d'erreur -->
+      <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Erreur!</strong> {{ error }}
+        <button type="button" class="btn-close" (click)="error = ''"></button>
+      </div>
+      
+      <!-- Chargement -->
+      <div *ngIf="loading" class="text-center p-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Chargement...</span>
+        </div>
+        <p class="mt-2">Chargement des vidéos...</p>
+      </div>
+      
+      <!-- Pas de vidéos -->
+      <div *ngIf="!loading && videos.length === 0" class="text-center p-5">
+        <div class="text-muted">
+          <i class="fas fa-video-slash fa-3x mb-3"></i>
+          <h4>Aucune vidéo disponible</h4>
+          <p>Commencez à télécharger des vidéos pour les voir apparaître ici.</p>
+          <a routerLink="/admin/upload" class="btn btn-primary mt-3">
+            <i class="fas fa-plus me-1"></i> Ajouter une vidéo
+          </a>
+        </div>
+      </div>
+      
+      <!-- Tableau des vidéos avec colonnes à largeur fixe -->
+      <div *ngIf="!loading && videos.length > 0" class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col" style="width: 100px; text-align: center;">Vidéo</th>
+              <th scope="col" style="width: 15%;">Titre</th>
+              <th scope="col" style="width: 25%;">Description</th>
+              <!-- Nouvelle colonne pour les genres -->
+              <th scope="col" style="width: 15%;">Genres</th>
+              <th scope="col" style="width: 120px; text-align: center;">Niveau requis</th>
+              <th scope="col" style="width: 80px; text-align: center;">Durée</th>
+              <th scope="col" style="width: 80px; text-align: center;">Taille</th>
+              <th scope="col" style="width: 120px; text-align: center;">Date d'ajout</th>
+              <th scope="col" style="width: 100px; text-align: center;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let video of videos">
+              <td class="text-center">
+                <img 
+                  [src]="video.thumbnailUrl || 'assets/default-thumbnail.jpg'" 
+                  alt="Miniature" 
+                  class="img-thumbnail" 
+                  style="width: 80px; height: 45px; object-fit: cover;"
+                >
+              </td>
+              <td class="fw-bold">{{ video.title }}</td>
+              <td>
+                <div class="text-truncate" style="max-width: 100%;" [title]="video.description">
+                  {{ video.description || 'Aucune description' }}
+                </div>
+              </td>
+              <!-- Cellule pour afficher les genres -->
+              <td>
+                <div class="d-flex flex-wrap gap-1">
+                  <span *ngFor="let genre of video.genre" class="badge bg-secondary">
+                    {{ genre }}
+                  </span>
+                  <span *ngIf="!video.genre || video.genre.length === 0" class="text-muted small">
+                    Aucun genre
+                  </span>
+                </div>
+              </td>
+              <td class="text-center">
+                <span class="badge rounded-pill" [ngClass]="{
+                  'bg-success': video.niveauAbonnementRequis === 'Standard',
+                  'bg-info': video.niveauAbonnementRequis === 'Basic',
+                  'bg-warning': video.niveauAbonnementRequis === 'Premium',
+                  'bg-danger': video.niveauAbonnementRequis === 'VIP'
+                }">{{ video.niveauAbonnementRequis }}</span>
+              </td>
+              <td class="text-center">{{ formatDuration(video.duration) }}</td>
+              <td class="text-center">{{ formatFileSize(video.size) }}</td>
+              <td class="text-center">{{ formatDate(video.uploadDate) }}</td>
+              <td>
+                <div class="d-flex justify-content-center gap-2">
+                  <button 
+                    class="btn btn-sm btn-outline-primary" 
+                    title="Modifier" 
+                    (click)="selectVideoForEdit(video)"
+                  >
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button 
+                    class="btn btn-sm btn-outline-danger" 
+                    title="Supprimer"
+                    (click)="deleteVideo(video)"
+                  >
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Formulaire d'édition (Modal) -->
+  <div *ngIf="selectedVideo" class="modal-backdrop fade show"></div>
+  <div *ngIf="selectedVideo" class="modal fade show d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">Modifier la vidéo</h5>
+          <button type="button" class="btn-close btn-close-white" (click)="cancelEdit()"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="editForm">
+            <div class="mb-3">
+              <label for="edit-title" class="form-label">Titre*</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="edit-title" 
+                formControlName="title"
+                [ngClass]="{'is-invalid': editForm.get('title')?.invalid && (editForm.get('title')?.dirty || editForm.get('title')?.touched)}"
+              >
+              <div *ngIf="editForm.get('title')?.invalid && (editForm.get('title')?.dirty || editForm.get('title')?.touched)" class="invalid-feedback">
+                <div *ngIf="editForm.get('title')?.errors?.['required']">Le titre est obligatoire.</div>
+                <div *ngIf="editForm.get('title')?.errors?.['minlength']">Le titre doit contenir au moins 3 caractères.</div>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="edit-description" class="form-label">Description</label>
+              <textarea 
+                class="form-control" 
+                id="edit-description" 
+                formControlName="description" 
+                rows="3"
+              ></textarea>
+            </div>
+            
+            <!-- Ajout du champ pour sélectionner les genres -->
+            <div class="mb-3">
+              <label for="edit-genre" class="form-label">Genres</label>
+              <select 
+                multiple 
+                class="form-select" 
+                id="edit-genre" 
+                formControlName="genre"
+                size="5"
+              >
+                <option *ngFor="let genre of allGenres" [value]="genre">{{ genre }}</option>
+              </select>
+              <div class="form-text">
+                Maintenez la touche Ctrl (ou Cmd sur Mac) pour sélectionner plusieurs genres.
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="edit-niveau" class="form-label">Niveau d'abonnement requis*</label>
+              <select 
+                class="form-select" 
+                id="edit-niveau" 
+                formControlName="niveauAbonnementRequis"
+                [ngClass]="{'is-invalid': editForm.get('niveauAbonnementRequis')?.invalid && (editForm.get('niveauAbonnementRequis')?.dirty || editForm.get('niveauAbonnementRequis')?.touched)}"
+              >
+                <option value="Standard">Standard (Gratuit)</option>
+                <option value="Basic">Basic</option>
+                <option *ngFor="let abonnement of abonnements" [value]="abonnement.nom">
+                  {{ abonnement.nom }}
+                </option>
+              </select>
+              <div *ngIf="editForm.get('niveauAbonnementRequis')?.invalid && (editForm.get('niveauAbonnementRequis')?.dirty || editForm.get('niveauAbonnementRequis')?.touched)" class="invalid-feedback">
+                <div *ngIf="editForm.get('niveauAbonnementRequis')?.errors?.['required']">Le niveau d'abonnement est obligatoire.</div>
+              </div>
+            </div>
+            
+            <!-- Ajout du champ pour remplacer le fichier vidéo -->
+            <div class="mb-3">
+              <label for="edit-file" class="form-label">Remplacer le fichier vidéo (optionnel)</label>
+              <input 
+                type="file" 
+                class="form-control" 
+                id="edit-file" 
+                accept="video/*"
+                (change)="onFileSelected($event)"
+              >
+              <div class="form-text">
+                Laissez ce champ vide si vous souhaitez conserver le fichier vidéo actuel.
+              </div>
+              <div *ngIf="selectedFile" class="mt-2">
+                <span class="badge bg-info">Nouveau fichier sélectionné : {{ selectedFile.name }}</span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Annuler</button>
+          <button type="button" class="btn btn-primary" [disabled]="editForm.invalid" (click)="saveChanges()">
+            <i class="fas fa-save me-1"></i> Enregistrer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

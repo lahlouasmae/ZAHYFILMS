@@ -1,0 +1,79 @@
+/* styles.css - thème sombre global avec ajustements */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #000;
+  color: #e0e0e0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* S'assurer que le conteneur principal remplit tout l'écran */
+app-root {
+  display: block;
+  min-height: 100vh;
+  background-color: #000;
+}
+
+/* Pour s'assurer que le texte et les conteneurs ont un contraste suffisant */
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+}
+
+p, span, div {
+  color: #e0e0e0;
+}
+
+/* Ajustement des éléments Bootstrap pour le thème sombre */
+.container, .container-fluid {
+  background-color: transparent;
+}
+
+.card {
+  background-color: #000;
+  border-color: #000;
+}
+
+.table {
+  color: #e0e0e0;
+}
+
+.table thead th {
+  border-bottom-color: #444;
+  color: #999;
+}
+
+.table td, .table th {
+  border-top-color: #333;
+}
+
+/* Empêcher que d'autres styles ne forcent le fond en blanc */
+.bg-white, .bg-light {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+}
+
+/* Pour les alertes et messages */
+.alert-info {
+  background-color: #193c5a;
+  color: #8bb9df;
+  border-color: #275a82;
+}
+
+.alert-danger {
+  background-color: #5a1919;
+  color: #df8b8b;
+  border-color: #822727;
+}
+
+.alert-success {
+  background-color: #1a5a2e;
+  color: #8edf9f;
+  border-color: #278245;
+}
+
+/* Assurer que le router-outlet et son contenu sont visibles */
+router-outlet + * {
+  display: block;
+  min-height: 50vh;
+}

@@ -1,0 +1,513 @@
+/* profile.component.scss */
+$primary-color: #6367f7;
+$primary-dark: #4a50e2;
+$text-dark: #333;
+$text-medium: #666;
+$border-color: #ddd;
+$light-bg: #f8f9fa;
+
+/* LAYOUT STYLES */
+body {
+  background-color: black;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: $text-dark;
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.main-content {
+  flex: 1;
+  padding: 30px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* HEADER & SIDEBAR */
+.logo {
+  padding: 15px 25px;
+  margin-bottom: 30px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 25px;
+  color: $text-dark;
+  text-decoration: none;
+  position: relative;
+  margin-bottom: 5px;
+  
+  i {
+    margin-right: 15px;
+    font-size: 18px;
+  }
+  
+  &.active {
+    color: $primary-color;
+    background-color: rgba(99, 103, 247, 0.1);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background-color: $primary-color;
+    }
+  }
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+}
+
+/* PROFILE CONTAINER */
+.profile-container {
+  max-width: 750px;
+  width: 100%;
+  background: black;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 
+              0 0 0 1px rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+  position: relative;
+  min-height: 500px; /* Add minimum height to ensure space for centering */
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  }
+}
+
+/* LOADING & ALERTS */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #f8f9fa;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(99, 103, 247, 0.3);
+  border-radius: 50%;
+  border-top-color: $primary-color;
+  animation: spin 1s linear infinite;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.alert {
+  padding: 16px;
+  border-radius: 8px;
+  margin: 15px;
+  backdrop-filter: blur(5px);
+}
+
+.alert-success {
+  background-color: rgba(40, 167, 69, 0.15);
+  border: 1px solid rgba(40, 167, 69, 0.3);
+  color: #2ecc71;
+}
+
+.alert-danger {
+  background-color: rgba(220, 53, 69, 0.15);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  color: #e74c3c;
+}
+
+/* NEW PROFILE LAYOUT */
+.profile-layout {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.profile-photo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.profile-photo-container {
+  width: 250px; /* Augmenté de 180px à 250px */
+  height: 250px; /* Augmenté de 180px à 250px */
+  position: relative;
+  margin: 0 auto 24px; /* Ajout de marge auto pour centrer horizontalement */
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),
+              0 0 0 1px rgba(255, 255, 255, 0.1);
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .camera-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    background-color: $primary-color;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    
+    &:hover {
+      transform: scale(1.1);
+      background-color: $primary-dark;
+    }
+    
+    i {
+      color: white;
+    }
+  }
+}
+
+.logo-section {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.logo-box, .vendor-docs-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.03);
+  transition: all 0.2s;
+  
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.07);
+  }
+}
+
+.logo-box {
+  flex: 0 0 80px;
+  height: 40px;
+}
+
+.vendor-docs-box {
+  flex: 1;
+  height: 40px;
+  gap: 8px;
+  
+  i {
+    font-size: 14px;
+  }
+}
+
+.profile-info-section {
+  margin-top: 20px;
+  background-color: black;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 12px;
+  
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: 5px;
+  }
+}
+
+.info-label {
+  flex: 0 0 150px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.3px;
+}
+
+.info-value {
+  flex: 1;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+}
+
+.edit-profile-btn {
+  margin-top: 25px;
+  background: linear-gradient(135deg, red, darkred); /* Modifié: Background rouge pour le bouton */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(226, 74, 74, 0.3);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  i {
+    font-size: 16px;
+  }
+}
+/* FORM STYLES */
+.form-group {
+  margin-bottom: 24px;
+  
+  label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.3px;
+  }
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.2s;
+  
+  &:focus {
+    border-color: $primary-color;
+    outline: none;
+    background-color: gray;
+    box-shadow: 0 0 0 3px rgba(99, 103, 247, 0.2);
+  }
+  
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.form-error {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.file-input-container {
+  margin-top: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.file-input {
+  position: absolute;
+  left: -9999px;
+}
+
+.file-input-label {
+  display: inline-block;
+  padding: 10px 18px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px);
+  }
+}
+
+.btn-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, red, darkred); /* Modifié: Background rouge pour le bouton */
+  color: white;
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(226, 74, 74, 0.3);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+
+.cancel-btn {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE STYLES */
+@media (min-width: 768px) {
+  .profile-layout {
+    flex-direction: row;
+    gap: 40px;
+    align-items: center; /* Change from flex-start to center */
+    min-height: 400px; /* Ensure enough height for vertical centering */
+  }
+  
+  .profile-photo-section {
+    flex: 0 0 200px;
+    margin-bottom: 0;
+    align-self: center; /* Ensure vertical centering */
+  }
+  
+  .profile-info-section {
+    flex: 1;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    width: 70px;
+  }
+  
+  .nav-text {
+    display: none;
+  }
+  
+  .logo {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .nav-item {
+    justify-content: center;
+    padding: 15px 0;
+    
+    i {
+      margin-right: 0;
+    }
+  }
+  
+  .main-content {
+    padding: 15px;
+  }
+  
+  .profile-layout {
+    padding: 20px;
+  }
+  
+  .profile-info-section {
+    padding: 15px;
+  }
+  
+  .info-row {
+    flex-direction: column;
+    padding-bottom: 15px;
+  }
+  
+  .info-label {
+    margin-bottom: 5px;
+  }
+  
+  .btn-group {
+    flex-direction: column-reverse;
+  }
+}
+
+/* View Mode & Edit Mode specific styles */
+.view-mode {
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* This helps with vertical centering */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

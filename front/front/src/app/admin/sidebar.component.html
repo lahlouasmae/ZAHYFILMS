@@ -1,0 +1,48 @@
+<!-- sidebar.component.html -->
+<div class="sidebar">
+  <div class="logo">
+    <h2>Admin Panel</h2>
+  </div>
+  <ul class="nav-links">
+    <li>
+      <a routerLink="/admin/dashboard" routerLinkActive="active">
+        <i class="fas fa-tachometer-alt"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/admin/user-management" routerLinkActive="active">
+        <i class="fas fa-users"></i>
+        <span>Utilisateurs</span>
+      </a>
+    </li>
+  
+    <li>
+      <a routerLink="/admin/videos" routerLinkActive="active">
+        <i class="fas fa-film"></i>
+        <span>Gestion vidéos</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/admin/upload" routerLinkActive="active">
+        <i class="fas fa-upload"></i>
+        <span>Upload vidéo</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/admin/abonnements']" routerLinkActive="active">
+        <i class="fas fa-box-open"></i> <!-- Icône pour abonnements -->
+        <span>Abonnements</span>
+      </a>
+    </li>
+ 
+    
+  
+    <li class="logout-item">
+      <a (click)="logout()" class="logout-link">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Déconnexion</span>
+      </a>
+    </li>
+  </ul>
+</div>

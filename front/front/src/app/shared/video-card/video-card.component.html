@@ -1,0 +1,64 @@
+<div class="video-card">
+  <div class="video-thumbnail" (click)="onPlayVideo()">
+    <!-- Utilisation de l'image miniature si disponible -->
+    <img *ngIf="video.thumbnailUrl" [src]="video.thumbnailUrl" [alt]="video.title" class="thumbnail-image" />
+
+    <!-- Fallback sur un placeholder si pas de miniature -->
+    <div *ngIf="!video.thumbnailUrl" class="thumbnail-placeholder">
+      <span>{{ video.title }}</span>
+    </div>
+
+    <!-- Badge pour indiquer le niveau d'abonnement -->
+    <div class="subscription-badge" [ngClass]="video.niveauAbonnementRequis">
+      {{ video.niveauAbonnementRequis }}
+    </div>
+
+    <!-- Barre de progression rouge collée en bas de la miniature -->
+    <div class="progress-bar-overlay" *ngIf="video.progress && video.duration">
+      <div class="progress-bar">
+        <div class="progress" [style.width.%]="getProgressPercentage()"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="video-info">
+    <h3>{{ video.title }}</h3>
+    <p class="description">{{ video.description }}</p>
+    <div class="genres-container" *ngIf="video.genre && video.genre.length > 0">
+      <span *ngFor="let genre of video.genre" class="genre-tag">
+        {{ genre }}
+      </span>
+    </div>
+
+   
+
+    <div class="video-meta">
+      <span class="duration">{{ formatDuration(video.duration) }}</span>
+      <span class="upload-date">{{ video.uploadDate | date }}</span>
+    </div>
+
+    <div class="video-actions">
+      <button class="play-btn" (click)="onPlayVideo()">
+        Regarder
+      </button>
+
+      <button *ngIf="showFavoriteButton" class="favorite-btn" (click)="toggleFavorite()">
+        <i class="icon" [class.favorite]="video.isFavorite">
+          ❤
+        </i>
+      </button>
+      
+      <!-- Nouveau bouton pour les commentaires -->
+      <button class="comments-btn" (click)="toggleComments()">
+        <i class="icon">
+          💬
+        </i>
+      </button>
+    </div>
+    
+    <!-- Section commentaires qui apparaît quand showComments est true -->
+    <div *ngIf="showComments" class="comments-section">
+      <app-comments [videoId]="video.id"></app-comments>
+    </div>
+  </div>
+</div>

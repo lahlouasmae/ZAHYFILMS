@@ -1,0 +1,42 @@
+<div class="card-container">
+    <h2>Abonnements</h2>
+    
+    <!-- Message de traitement -->
+    <div class="message-container" *ngIf="processingPayment">
+      <div class="loading-spinner"></div>
+      <p>Traitement de votre paiement en cours...</p>
+    </div>
+    
+    <!-- Message de succès -->
+    <div class="alert alert-success" *ngIf="successMessage">
+      <p>{{ successMessage }}</p>
+    </div>
+    
+    <!-- Message d'erreur -->
+    <div class="alert alert-danger" *ngIf="errorMessage">
+      <p>{{ errorMessage }}</p>
+    </div>
+    
+    <!-- Liste des abonnements -->
+    <div class="abonnement-list" *ngIf="!processingPayment && !successMessage">
+      <div class="abonnement-card" *ngFor="let abonnement of abonnements">
+        <div class="abonnement-header">
+          <h3>{{ abonnement.nom }}</h3>
+          <p class="abonnement-prix">{{ abonnement.prix }}€ / {{ abonnement.duree || 30 }} jours</p>
+        </div>
+        <div class="abonnement-content">
+          <p>{{ abonnement.description || 'Abonnement standard' }}</p>
+          <ul class="abonnement-features">
+            <li>Nombre d'écrans: {{ abonnement.nombreEcrans }}</li>
+            <li>Qualité HD: {{ abonnement.qualiteHD ? 'Oui' : 'Non' }}</li>
+            <li>Qualité 4K: {{ abonnement.qualite4K ? 'Oui' : 'Non' }}</li>
+          </ul>
+        </div>
+        <div class="abonnement-footer">
+          <button class="btn-subscribe" (click)="subscribe(abonnement.id)" [disabled]="isLoading">
+            S'abonner
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

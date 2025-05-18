@@ -1,0 +1,106 @@
+<div class="netflix-form-container">
+  <div class="form-wrapper">
+    <h1 class="form-title">S'inscrire</h1>
+    
+    <form *ngIf="!isSuccessful" name="form" (ngSubmit)="onSubmit()" #f="ngForm">
+      <!-- Champ username -->
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          placeholder="Nom d'utilisateur"
+          [(ngModel)]="form.username"
+          required
+          minlength="3"
+          maxlength="20"
+          #username="ngModel"
+        />
+        <div class="error-message" *ngIf="username.errors && username.touched">
+          <span *ngIf="username.errors['required']">Le nom d'utilisateur est requis</span>
+          <span *ngIf="username.errors['minlength']">Le nom d'utilisateur doit comporter au moins 3 caractères</span>
+          <span *ngIf="username.errors['maxlength']">Le nom d'utilisateur ne doit pas dépasser 20 caractères</span>
+        </div>
+      </div>
+      
+      <!-- Champ email -->
+      <div class="form-group">
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          placeholder="Email ou numéro de téléphone"
+          [(ngModel)]="form.email"
+          required
+          email
+          #email="ngModel"
+        />
+        <div class="error-message" *ngIf="email.errors && email.touched">
+          <span *ngIf="email.errors['required']">L'email est requis</span>
+          <span *ngIf="email.errors['email']">L'email doit être une adresse email valide</span>
+        </div>
+      </div>
+      
+      <!-- Champ password -->
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          placeholder="Mot de passe"
+          [(ngModel)]="form.password"
+          required
+          minlength="6"
+          #password="ngModel"
+        />
+        <div class="error-message" *ngIf="password.errors && password.touched">
+          <span *ngIf="password.errors['required']">Le mot de passe est requis</span>
+          <span *ngIf="password.errors['minlength']">Le mot de passe doit comporter au moins 6 caractères</span>
+        </div>
+      </div>
+      
+      <!-- Bouton d'inscription -->
+      <div class="form-group">
+        <button class="btn-sign-in" type="submit">S'inscrire</button>
+      </div>
+      
+      <!-- Message d'erreur -->
+      <div class="error-alert" *ngIf="isSignUpFailed">
+        Échec de l'inscription: {{ errorMessage }}
+      </div>
+      
+      <!-- Mémoriser et aide -->
+      <div class="form-options">
+        <div class="remember-me">
+          <input type="checkbox" id="remember" name="remember">
+          <label for="remember">Se souvenir de moi</label>
+        </div>
+        <a href="#" class="help-link">Besoin d'aide?</a>
+      </div>
+      
+      <!-- Connexion Facebook -->
+      <div class="social-login">
+        <a href="#" class="facebook-login">
+          <i class="fa fa-facebook-square"></i> Se connecter avec Facebook
+        </a>
+      </div>
+      
+      <!-- Nouveau sur Netflix -->
+      <div class="signup-now">
+        <span>Nouveau sur Netflix?</span>
+        <a href="#">S'inscrire maintenant.</a>
+      </div>
+      
+      <!-- reCAPTCHA -->
+      <div class="recaptcha-info">
+        Cette page est protégée par Google reCAPTCHA pour s'assurer que vous n'êtes pas un robot.
+        <a href="#">En savoir plus.</a>
+      </div>
+    </form>
+    
+    <!-- Message de succès -->
+    <div class="success-message" *ngIf="isSuccessful">
+      Votre inscription a été effectuée avec succès!
+    </div>
+  </div>
+</div>

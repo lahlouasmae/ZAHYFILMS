@@ -1,0 +1,51 @@
+admin-token: "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInVzZXJJZCI6MSwic3ViIjoiYWRtaW4iLCJpYXQiOjE3NDY3MzA2MzMsImV4cCI6MTc0NjgxNzAzM30.OWF9mgIyXHd9lSObob95JvO49Q6QItW-MlJ95Ngty8aL-GH982lXp8l532ZgwaG5BoEv0-w0ZEzpJXrFArqLmw"
+server:
+  port: 8086
+
+spring:
+  application:
+    name: service-notification
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 587
+    username: 2dbc3c1627d7ba
+    password: 724f66a4813627
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    from: noreply@zahyfilms.com
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 10000
+      service-commentaire:
+        connectTimeout: 15000
+        readTimeout: 15000
+  circuitbreaker:
+    enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true

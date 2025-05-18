@@ -1,0 +1,22 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: service_commentaire
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/service_commentaire
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+

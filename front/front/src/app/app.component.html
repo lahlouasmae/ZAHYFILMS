@@ -1,0 +1,23 @@
+<header>
+  <nav>
+    <a routerLink="/">ZAHY FILM</a>
+    <ng-container *ngIf="isLoggedIn">
+      <a routerLink="/accueil">Accueil</a>
+      <a routerLink="/Films">Films</a>
+      <a routerLink="/Favoris">Favoris</a>
+      <a routerLink="/History">Historique</a>
+      <a routerLink="/profil">Profil</a>
+    </ng-container>
+    <div class="spacer"></div>
+    <ng-container *ngIf="!isLoggedIn">
+      <a routerLink="/connexion">Connexion</a>
+      <a routerLink="/inscription">Inscription</a>
+    </ng-container>
+    <ng-container *ngIf="isLoggedIn">
+      <a href="#" (click)="logout($event)">Déconnexion</a>
+    </ng-container>
+  </nav>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>

@@ -1,0 +1,81 @@
+/* sidebar.component.css - thème sombre */
+.sidebar {
+  height: 100vh;
+  width: 240px;
+  background-color: #e50914; /* Rose vif comme demandé initialement */
+  position: fixed;
+  left: 0;
+  top: 0;
+  color: white;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 2; /* S'assurer que la sidebar est au-dessus du contenu */
+}
+
+.logo {
+  padding: 20px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: white; /* S'assurer que le texte est blanc */
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  margin: 5px 0;
+}
+
+.nav-links li a {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+}
+
+.nav-links li a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-links li a.active {
+  background-color: rgba(255, 255, 255, 0.3);
+  font-weight: bold;
+}
+
+.nav-links li a i {
+  margin-right: 10px;
+  font-size: 18px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Pour les écrans plus petits */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 70px;
+  }
+  
+  .logo h2 {
+    display: none;
+  }
+  
+  .nav-links li a span {
+    display: none;
+  }
+  
+  .nav-links li a i {
+    margin-right: 0;
+    font-size: 20px;
+  }
+}

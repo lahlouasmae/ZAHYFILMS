@@ -1,0 +1,22 @@
+/* admin-layout.component.css - thème sombre */
+.admin-layout {
+  display: flex;
+  background-color: #000; /* Fond sombre mais pas complètement noir */
+}
+
+.content {
+  flex: 1;
+  margin-left: 240px;
+  padding: 20px;
+  background-color: #000; /* Gris très foncé */
+  color: #e0e0e0; /* Texte presque blanc pour un bon contraste */
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin-left: 70px;
+  }
+}

@@ -1,0 +1,113 @@
+<div class="abonnement-container dark-mode">
+  <div class="header-actions">
+    <h2 class="sidebar-title">Gestion des Abonnements</h2>
+  </div>
+  
+  <!-- Bouton pour ajouter un nouvel abonnement (remplace la carte) -->
+  <div class="add-button-container" *ngIf="!showForm">
+    <button class="btn btn-add-abonnement" (click)="toggleForm()">
+      <i class="fa fa-plus-circle"></i> Ajouter un nouvel abonnement
+    </button>
+  </div>
+  
+  <!-- Formulaire pour créer ou éditer un abonnement -->
+  <div class="form-container" *ngIf="showForm">
+    <form [formGroup]="abonnementForm" (ngSubmit)="onSubmit()" class="abonnement-form">
+      <div class="form-header">
+        <h3>
+          <i class="fa" [ngClass]="{'fa-plus-circle': !isEditing, 'fa-pencil': isEditing}"></i>
+          {{ isEditing ? 'Modifier l\'abonnement' : 'Ajouter un abonnement' }}
+        </h3>
+      </div>
+      
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" formControlName="nom" class="form-control" placeholder="Premium, Standard, Basic, etc.">
+        <div class="error-message" *ngIf="abonnementForm.get('nom')?.invalid && abonnementForm.get('nom')?.touched">
+          Le nom est requis et ne doit pas dépasser 30 caractères.
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="prix">Prix mensuel (€)</label>
+        <input type="number" id="prix" formControlName="prix" class="form-control" step="0.01" min="0">
+        <div class="error-message" *ngIf="abonnementForm.get('prix')?.invalid && abonnementForm.get('prix')?.touched">
+          Le prix est requis et doit être positif.
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="nombreEcrans">Nombre d'écrans</label>
+        <input type="number" id="nombreEcrans" formControlName="nombreEcrans" class="form-control" min="1">
+        <div class="error-message" *ngIf="abonnementForm.get('nombreEcrans')?.invalid && abonnementForm.get('nombreEcrans')?.touched">
+          Le nombre d'écrans est requis et doit être au moins 1.
+        </div>
+      </div>
+      
+      <div class="form-check">
+        <input type="checkbox" id="qualiteHD" formControlName="qualiteHD" class="form-check-input">
+        <label for="qualiteHD" class="form-check-label">Qualité HD</label>
+      </div>
+      
+      <div class="form-check">
+        <input type="checkbox" id="qualite4K" formControlName="qualite4K" class="form-check-input">
+        <label for="qualite4K" class="form-check-label">Qualité 4K UHD</label>
+      </div>
+      
+      <div class="form-actions">
+        <button type="submit" [disabled]="abonnementForm.invalid" class="btn btn-success">
+          {{ isEditing ? 'Mettre à jour' : 'Créer' }}
+        </button>
+        <button type="button" (click)="resetForm()" class="btn btn-secondary">Annuler</button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Liste des abonnements -->
+  <div class="abonnement-grid">
+    <div class="abonnement-box" *ngFor="let abonnement of abonnements">
+      <div class="card-header">
+        <div class="logo-container">
+          <span class="abonnement-badge" [ngClass]="normalizeClassName(abonnement.nom)">
+            {{ abonnement.nom }}
+          </span>
+        </div>
+        <div class="admin-actions">
+          <button class="btn btn-edit" (click)="editAbonnement(abonnement)" title="Modifier">
+            <i class="fas fa-pen"></i>
+          </button>
+          <button class="btn btn-delete" (click)="deleteAbonnement(abonnement.id)" title="Supprimer">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="company-info">
+        <span class="date">ID: {{ abonnement.id }}</span>
+      </div>
+      
+      <h3 class="abonnement-title">{{ abonnement.nom }}</h3>
+      
+      <div class="badges">
+        <span class="badge">{{ abonnement.nombreEcrans }} écran(s)</span>
+        <span class="badge" *ngIf="abonnement.qualiteHD">HD</span>
+        <span class="badge" *ngIf="abonnement.qualite4K">4K UHD</span>
+      </div>
+      
+      <div class="price-info">
+        <div class="price">
+          <span class="amount">{{ abonnement.prix | currency:'EUR' }}/mois</span>
+          <div>
+            <span class="location">Profitez de tous les avantages</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Message si aucun abonnement -->
+  <div class="empty-state" *ngIf="abonnements.length === 0">
+    <i class="fa fa-info-circle"></i>
+    <p>Aucun abonnement disponible. Cliquez sur "Ajouter un abonnement" pour commencer.</p>
+  </div>
+</div>

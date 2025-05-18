@@ -1,0 +1,140 @@
+/* Style général du conteneur */
+.container {
+  max-width: 100%;
+  padding: 20px;
+  background-color: #000;
+}
+
+/* Style pour la carte qui contient le tableau */
+.container > div:not(.text-center):not(.alert) {
+  background-color: #000;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Style pour le titre et le compteur d'utilisateurs */
+.d-flex.justify-content-between.align-items-center.mb-3 {
+  padding: 16px;
+  border-bottom: 1px solid #e9ecef;
+  margin-bottom: 0 !important;
+}
+
+.d-flex.justify-content-between.align-items-center.mb-3 h4 {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 0;
+}
+
+/* Style pour le tableau */
+.table-responsive {
+  margin-bottom: 0;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  padding: 12px 15px;
+  font-weight: 500;
+  color: #666;
+  background-color: #000;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.table tbody td {
+  padding: 12px 15px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Style pour les avatars utilisateurs */
+.user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-avatar img {
+  border: 1px solid #eee;
+}
+
+.avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #666;
+  border: 1px solid #ddd;
+}
+
+/* Style pour les badges d'abonnement */
+.subscription-badge {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+/* Classes spécifiques pour les différents types d'abonnement */
+.badge-premium {
+  background-color: #dcf5dc;
+  color: #28a745;
+}
+
+.badge-standard {
+  background-color: #e2f0fd;
+  color: #0d6efd;
+}
+
+.badge-basic {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+/* Style pour les boutons d'action */
+.btn-group {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.btn-danger {
+  background-color: transparent;
+  border: none;
+  color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #f8d7da;
+}
+
+.btn-danger i {
+  margin-right: 4px;
+}
+
+/* Style pour le message "aucun utilisateur trouvé" */
+.alert-info {
+  margin: 16px;
+  border-radius: 4px;
+}
+
+/* Ajoutons un peu de style aux headers de colonne pour qu'ils ressemblent à Dataflow */
+thead tr {
+  height: 48px;
+}
+
+/* Pour que les tr aient un effet hover comme dans Dataflow */
+tbody tr:hover {
+  background-color: #f8f9fa;
+}

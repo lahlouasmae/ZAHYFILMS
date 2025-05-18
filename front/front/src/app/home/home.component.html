@@ -1,0 +1,83 @@
+<!-- Films disponibles -->
+<div class="container" *ngIf="!selectedVideo">
+  <div class="row">
+    <div class="col-12">
+      <h2></h2>
+    </div>
+  </div>
+  
+  <div *ngIf="loading" class="text-center mt-4">
+    <p>Chargement des films...</p>
+  </div>
+  
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+  
+  <!-- Affichage par genre -->
+  <div *ngIf="!loading && videosByGenre.length > 0">
+    <div *ngFor="let genreGroup of videosByGenre" class="genre-section">
+      <h3 class="genre-title">{{ genreGroup.genre.join(', ') }}</h3>
+      
+      <div class="films-grid">
+        <app-video-card
+          *ngFor="let video of genreGroup.videos"
+          [video]="video"
+          [showFavoriteButton]="true"
+          (playVideo)="playVideo(video)"
+          (favoriteChanged)="onFavoriteChanged($event)">
+        </app-video-card>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="!loading && videosByGenre.length === 0" class="alert alert-info">
+    <p>Aucun film n'est disponible pour votre niveau d'abonnement.</p>
+  </div>
+</div>
+
+<!-- Lecteur vidéo -->
+<div *ngIf="selectedVideo" class="video-player-container">
+  <div class="video-header">
+    <!-- Titre supprimé d'ici -->
+    <button class="close-button" (click)="closeVideoPlayer()">×</button>
+  </div>
+  
+  <div class="video-content">
+    <div class="video-wrapper">
+      <video #videoPlayer 
+        controls 
+        (timeupdate)="updateProgress()" 
+        (ended)="videoEnded()"
+        (loadedmetadata)="videoLoaded()">
+        <source [src]="selectedVideo?.url" type="video/mp4">
+        Votre navigateur ne supporte pas les vidéos HTML5.
+      </video>
+    </div>
+    
+    <div class="video-info">
+      <!-- Titre ajouté ici -->
+      <h3 class="video-title">{{ selectedVideo?.title }}</h3>
+      
+      <div class="video-metadata">
+        <span>La durée du film:{{ formatDuration(selectedVideo?.duration || 0) }}</span>
+        <span>Ajouté le {{ selectedVideo?.uploadDate | date:'longDate' }}</span>
+        <span>Genre: {{ selectedVideo?.genre?.join(', ') }}</span>
+        <span>
+          Niveau requis: {{ selectedVideo?.niveauAbonnementRequis }}
+        </span>
+      </div>
+      
+  
+      
+      <div class="video-description">
+        <p>{{ selectedVideo?.description }}</p>
+      </div>
+          <button 
+        [class]="selectedVideo?.isFavorite ? 'btn btn-warning' : 'btn btn-primary'"
+        (click)="selectedVideo && toggleFavorite(selectedVideo)">
+        {{ selectedVideo?.isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris' }}
+      </button>
+    </div>
+  </div>
+</div>
