@@ -128,7 +128,8 @@ Other Tools: Postman, Mailtrap, Botpress
 AI agent: Botpress
 
 ## 🎥 Video Demo
-📽️ Coming Soon – A walkthrough of ZAHY FILMS features and architecture
+A walkthrough of ZAHY FILMS features and architecture
+https://github.com/user-attachments/assets/a4f16760-2ff6-4c65-aeff-5ef7b1557d4c
 
 ## 👨‍💻 Contributors
 Asmae Lahlou 
