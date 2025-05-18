@@ -34,7 +34,7 @@ ZAHY FILMS follows a modern three-tier architecture:
 
 ### Frontend
 - **Web**: Developed with Angular, TypeScript, HTML, and CSS
-- **ia agent botpress**: Multilingual assistance, available 24/7, with answers to frequently asked questions about subscriptions and usage.
+- **CineBot**: Multilingual assistance, available 24/7, with answers to frequently asked questions about subscriptions and usage.
 ### Backend
 - **Java & Spring Boot**: Modular microservices for Users, Videos, Comments, Recommendations, and Notifications
 - **Python & Flask**: Sentiment analysis and AI services
@@ -103,6 +103,14 @@ Backend runs on: http://localhost:8080
 - Receive recommendations
 
 - Access notification center
+  
+- Add videos to his favorites
+  
+- View his history
+  
+- Edit his Profile
+  
+- Change his Subscription
 
 - Interact with CineBot (chat assistant)
 
@@ -110,8 +118,6 @@ Backend runs on: http://localhost:8080
 - Manage users and subscriptions
 
 - Manage videos (upload, edit, delete)
-
-- Moderate comments
 
 - View platform stats (dashboard)
 
