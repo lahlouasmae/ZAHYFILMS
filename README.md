@@ -24,7 +24,7 @@ ZAHY FILMS is an innovative video streaming platform designed to offer an intuit
 - Integrated chatbot assistant (CineBot)
 - Admin dashboard for user and content management
 
----
+
 
 ## 🧱 Software Architecture
 
@@ -134,9 +134,11 @@ Storage: MinIO (S3 compatible)
 
 Message Broker: RabbitMQ
 
-Other Tools: Postman, Mailtrap, Botpress
-AI agent: Botpress
+Chatbot assistant: Botpress
 
+Online payment : PayPal
+
+Other Tools: Postman, Mailtrap
 ## 🎥 Video Demo
 A walkthrough of ZAHY FILMS features and architecture
 
@@ -151,18 +153,18 @@ Hafsa Sabrou
 
 Younes Amerga
 
-Supervisor: Prof. Chafik Baidada – ENSA El Jadida
+**Supervisor:** Prof. Chafik Baidada – ENSA El Jadida
 
 ## 🤝 Contributing
 We welcome contributions! If you’d like to improve or extend ZAHY FILMS:
 
-Fork the repository
+- Fork the repository
 
-Create a new feature branch
+- Create a new feature branch
 
-Commit and push changes
+- Commit and push changes
 
-Open a pull request
+- Open a pull request
 
 Let’s build something awesome together!
 
