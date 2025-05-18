@@ -23,6 +23,9 @@ ZAHY FILMS is an innovative video streaming platform designed to offer an intuit
 
 ZAHY FILMS follows a modern three-tier architecture:
 
+![image](https://github.com/user-attachments/assets/d1a3571c-222b-4336-ba36-956013544e75)
+  <img src="assets/d1a3571c-222b-4336-ba36-956013544e75" alt="Project's architecture" style="width: 900PX; height: 300px;">
+
 ### Frontend
 - **Web**: Developed with Angular, TypeScript, HTML, and CSS
 - **Mobile**: (Optional/Planned) Android-based app using MVVM pattern
